@@ -1,0 +1,25 @@
+[{
+
+  "name": "ОВОЩ",
+  "coordinate_x": 12.0,
+  "coordinate_y": 12.0,
+  "health": 100.0,
+  "category": "AGGRESSOR",
+  "weapon": " ",
+  "melee_weapon": " ",
+  "chapter": " "
+
+},
+  {
+    "name": "ФРУКТ",
+    "coordinate_x": 12.0,
+    "coordinate_y": 12.0,
+    "health": 100.0,
+    "category": "AGGRESSOR",
+    "weapon": " ",
+    "melee_weapon": " ",
+    "chapter": " "
+  }
+]
+
+

@@ -1,0 +1,89 @@
+import java.time.LocalDate;
+
+public class SpaceMarine implements Comparable {
+    private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private String name; //Поле не может быть null, Строка не может быть пустой
+    private Coordinates coordinates; //Поле не может быть null
+    private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Integer health; //Поле может быть null, Значение поля должно быть больше 0
+    private AstartesCategory category; //Поле не может быть null
+    private Weapon weaponType; //Поле может быть null
+    private MeleeWeapon meleeWeapon; //Поле может быть null
+    private Chapter chapter; //Поле может быть null
+
+    public SpaceMarine() {
+        id = (int) Math.random() * 1000;
+        creationDate = LocalDate.now();
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setHealth(Integer health) {
+        this.health = health;
+    }
+
+    public void setCategory(AstartesCategory category) {
+        this.category = category;
+    }
+
+    public void setWeaponType(Weapon weaponType) {
+        this.weaponType = weaponType;
+    }
+
+    public void setMeleeWeapon(MeleeWeapon meleeWeapon) {
+        this.meleeWeapon = meleeWeapon;
+    }
+
+    public void setChapter(Chapter chapter) {
+        this.chapter = chapter;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public Integer getHealth() {
+        return health;
+    }
+
+    public AstartesCategory getCategory() {
+        return category;
+    }
+
+    public Weapon getWeaponType() {
+        return weaponType;
+    }
+
+    public MeleeWeapon getMeleeWeapon() {
+        return meleeWeapon;
+    }
+
+    public Chapter getChapter() {
+        return chapter;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        SpaceMarine temp_space_marine = (SpaceMarine) o;
+        if (this.id < temp_space_marine.id) {
+            return -1;
+        } else if (this.id > temp_space_marine.id) {
+            return 1;
+        }
+        return 0;
+    }
+}
+
+
