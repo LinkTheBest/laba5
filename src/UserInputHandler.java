@@ -1,3 +1,10 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 public class UserInputHandler {
@@ -26,7 +33,6 @@ public class UserInputHandler {
     }
 
     public void showCommand() {
-        System.out.println(space_deque.size());
         for (SpaceMarine s : space_deque) {
             System.out.println("-----------------");
             System.out.println(s.getName());
@@ -43,6 +49,7 @@ public class UserInputHandler {
     }
 
     public void addCommand(String name) {
+        List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
         int attempt_counter = 3;
         int counter = 0;
         Scanner temp_scn = new Scanner(System.in);
@@ -53,31 +60,53 @@ public class UserInputHandler {
         AstartesCategory temp_category = null;
         SpaceMarine added_spc_mrn = new SpaceMarine();
         added_spc_mrn.setName(name);
-        System.out.println("Введите координаты типа Х и Y: ");
-
-        try {
-            temp_coords.setX(temp_scn.nextDouble());
-            temp_coords.setY(temp_scn.nextFloat());
-        } catch (Exception e) {
-            System.out.println("Вызовите команду снова и введите координаты в заданном формате!");
+// ---------------------------------------------------------------------------------------------------------------------
+        System.out.println("Введите координаты, сначала Х, затем Y: ");
+        while (true) {
+            try {
+                if (!temp_scn.hasNextDouble()) {
+                    System.out.println("Введите два числа!");
+                    temp_scn.next();
+                    continue;
+                }
+                temp_coords.setX(temp_scn.nextDouble());
+                if (!temp_scn.hasNextFloat()) {
+                    System.out.println("Введите число!");
+                    temp_scn.next();
+                    continue;
+                }
+                temp_coords.setY(temp_scn.nextFloat());
+            } catch (Exception e) {
+                System.out.println("Вызовите команду снова и введите координаты в заданном формате!");
+            }
+            break;
         }
-
         added_spc_mrn.setCoordinates(temp_coords);
+// ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите количество ХП: ");
-        try {
-            added_spc_mrn.setHealth(temp_scn.nextInt());
-        } catch (Exception ex) {
-            System.out.println("Введите целочисленное значение!");
-        }
+        while(true) {
 
-        System.out.println("Введите имя главы");
+            try {
+                if (!temp_scn.hasNextInt()) {
+                    System.out.println("Введите число!");
+                    temp_scn.next();
+                    continue;
+                }
+                added_spc_mrn.setHealth(temp_scn.nextInt());
+            } catch (Exception ex) {
+                System.out.println("Введите целочисленное значение!");
+            }
+            break;
+        }
+// ---------------------------------------------------------------------------------------------------------------------
+        System.out.println("Введите имя главы:");
         try {
             temp_chapter.setName(temp_scn.nextLine());
         } catch (Exception e) {
             System.out.println("Введите строку!");
         }
         added_spc_mrn.setChapter(temp_chapter);
-
+// ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите номер нужного вам названия 'Weapon':");
         for (Weapon weapon : Weapon.values()) {
             counter++;
@@ -88,26 +117,34 @@ public class UserInputHandler {
             switch (counter) {
                 case 1:
                     temp_weapon = Weapon.MELTAGUN;
+                    counter = 0;
                     break;
                 case 2:
                     temp_weapon = Weapon.BOLT_PISTOL;
+                    counter = 0;
                     break;
                 case 3:
                     temp_weapon = Weapon.COMBI_FLAMER;
+                    counter = 0;
                     break;
                 case 4:
                     temp_weapon = Weapon.COMBI_PLASMA_GUN;
+                    counter = 0;
                     break;
                 case 5:
                     temp_weapon = Weapon.MISSILE_LAUNCHER;
+                    counter = 0;
+                    break;
                 default:
-                    System.out.println("Выберите хоть что-нибудь из списка(");
+                    temp_weapon = Weapon.MELTAGUN;
+                    counter = 0;
+                    break;
 
             }
         } catch (Exception e) {
         }
         added_spc_mrn.setWeaponType(temp_weapon);
-
+// ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите номер нужного вам названия 'MeleeWeapon':");
         for (MeleeWeapon melee_weapon : MeleeWeapon.values()) {
             counter++;
@@ -118,21 +155,25 @@ public class UserInputHandler {
             switch (counter) {
                 case 1:
                     temp_melee_weapon = MeleeWeapon.CHAIN_SWORD;
+                    counter = 0;
                     break;
                 case 2:
                     temp_melee_weapon = MeleeWeapon.MANREAPER;
+                    counter = 0;
                     break;
                 case 3:
                     temp_melee_weapon = MeleeWeapon.POWER_BLADE;
+                    counter = 0;
                     break;
                 default:
-                    System.out.println("Выберите хоть что-нибудь из списка(");
+                    temp_melee_weapon = MeleeWeapon.CHAIN_SWORD;
+                    break;
 
             }
         } catch (Exception e) {
         }
         added_spc_mrn.setMeleeWeapon(temp_melee_weapon);
-
+// ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите номер нужного вам названия 'AstarsetsCategory':");
         for (AstartesCategory category : AstartesCategory.values()) {
             counter++;
@@ -143,23 +184,75 @@ public class UserInputHandler {
             switch (counter) {
                 case 1:
                     temp_category = AstartesCategory.AGGRESSOR;
+                    counter = 0;
                     break;
                 case 2:
                     temp_category = AstartesCategory.INCEPTOR;
+                    counter = 0;
                     break;
                 case 3:
                     temp_category = AstartesCategory.TACTICAL;
+                    counter = 0;
                     break;
                 case 4:
                     temp_category = AstartesCategory.TERMINATOR;
+                    counter = 0;
                     break;
                 default:
-                    System.out.println("Выберите хоть что-нибудь из списка(");
+                    temp_category = AstartesCategory.AGGRESSOR;
+                    counter = 0;
+                    break;
 
             }
         } catch (Exception e) {
         }
         added_spc_mrn.setCategory(temp_category);
+// ---------------------------------------------------------------------------------------------------------------------
+        temp_list.add(added_spc_mrn);
+        space_deque = new ArrayDeque<>(temp_list);
+    }
+
+    public void removeByIdCommand(int index) {
+        List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
+        try {
+            temp_list.remove(index);
+        } catch (Exception e) {
+            System.out.println("Такого элемента не существует!");
+        }
+        space_deque = new ArrayDeque<>(temp_list);
+    }
+
+    public void clearCommand() {
+        space_deque.clear();
+    }
+
+    public void saveCommand() {
+        RandomFilePathCreator rnd_file_path_creator = new RandomFilePathCreator();
+        JSONArray to_file_array = new JSONArray();
+
+        for (SpaceMarine spc_mrn : space_deque) {
+            JSONObject to_json_array_obj = new JSONObject();
+            to_json_array_obj.put("name", spc_mrn.getName());
+            to_json_array_obj.put("coordinate_x", spc_mrn.getCoordinates().getX());
+            to_json_array_obj.put("coordinate_y", spc_mrn.getCoordinates().getY());
+            to_json_array_obj.put("health", spc_mrn.getHealth());
+            to_json_array_obj.put("category", spc_mrn.getCategory().name());
+            to_json_array_obj.put("weapon", spc_mrn.getWeaponType().name());
+            to_json_array_obj.put("melee_weapon", spc_mrn.getMeleeWeapon().name());
+            to_json_array_obj.put("chapter", spc_mrn.getChapter().getName());
+            to_file_array.add(to_json_array_obj);
+        }
+        try {
+            BufferedOutputStream output_stream = new BufferedOutputStream(new FileOutputStream(rnd_file_path_creator.pathCreator()));
+            output_stream.write(to_file_array.toJSONString().getBytes());
+            output_stream.flush();
+            output_stream.close();
+        } catch (java.io.FileNotFoundException err) {
+            System.out.println("File not found!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
