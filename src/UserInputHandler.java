@@ -1,10 +1,7 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class UserInputHandler {
@@ -84,7 +81,7 @@ public class UserInputHandler {
         added_spc_mrn.setCoordinates(temp_coords);
 // ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите количество ХП: ");
-        while(true) {
+        while (true) {
 
             try {
                 if (!temp_scn.hasNextInt()) {
@@ -112,36 +109,44 @@ public class UserInputHandler {
             counter++;
             System.out.println(counter + ". " + weapon.name());
         }
-        try {
-            counter = temp_scn.nextInt();
-            switch (counter) {
-                case 1:
-                    temp_weapon = Weapon.MELTAGUN;
-                    counter = 0;
-                    break;
-                case 2:
-                    temp_weapon = Weapon.BOLT_PISTOL;
-                    counter = 0;
-                    break;
-                case 3:
-                    temp_weapon = Weapon.COMBI_FLAMER;
-                    counter = 0;
-                    break;
-                case 4:
-                    temp_weapon = Weapon.COMBI_PLASMA_GUN;
-                    counter = 0;
-                    break;
-                case 5:
-                    temp_weapon = Weapon.MISSILE_LAUNCHER;
-                    counter = 0;
-                    break;
-                default:
-                    temp_weapon = Weapon.MELTAGUN;
-                    counter = 0;
-                    break;
+        while (true) {
+            try {
+                if (!temp_scn.hasNextInt()) {
+                    System.out.println("Введите число!");
+                    temp_scn.next();
+                    continue;
+                }
+                counter = temp_scn.nextInt();
+                switch (counter) {
+                    case 1:
+                        temp_weapon = Weapon.MELTAGUN;
+                        counter = 0;
+                        break;
+                    case 2:
+                        temp_weapon = Weapon.BOLT_PISTOL;
+                        counter = 0;
+                        break;
+                    case 3:
+                        temp_weapon = Weapon.COMBI_FLAMER;
+                        counter = 0;
+                        break;
+                    case 4:
+                        temp_weapon = Weapon.COMBI_PLASMA_GUN;
+                        counter = 0;
+                        break;
+                    case 5:
+                        temp_weapon = Weapon.MISSILE_LAUNCHER;
+                        counter = 0;
+                        break;
+                    default:
+                        temp_weapon = Weapon.MELTAGUN;
+                        counter = 0;
+                        break;
 
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
+            break;
         }
         added_spc_mrn.setWeaponType(temp_weapon);
 // ---------------------------------------------------------------------------------------------------------------------
@@ -150,27 +155,35 @@ public class UserInputHandler {
             counter++;
             System.out.println(counter + ". " + melee_weapon.name());
         }
-        try {
-            counter = temp_scn.nextInt();
-            switch (counter) {
-                case 1:
-                    temp_melee_weapon = MeleeWeapon.CHAIN_SWORD;
-                    counter = 0;
-                    break;
-                case 2:
-                    temp_melee_weapon = MeleeWeapon.MANREAPER;
-                    counter = 0;
-                    break;
-                case 3:
-                    temp_melee_weapon = MeleeWeapon.POWER_BLADE;
-                    counter = 0;
-                    break;
-                default:
-                    temp_melee_weapon = MeleeWeapon.CHAIN_SWORD;
-                    break;
+        while (true) {
+            try {
+                if (!temp_scn.hasNextInt()) {
+                    System.out.println("Введите число!");
+                    temp_scn.next();
+                    continue;
+                }
+                counter = temp_scn.nextInt();
+                switch (counter) {
+                    case 1:
+                        temp_melee_weapon = MeleeWeapon.CHAIN_SWORD;
+                        counter = 0;
+                        break;
+                    case 2:
+                        temp_melee_weapon = MeleeWeapon.MANREAPER;
+                        counter = 0;
+                        break;
+                    case 3:
+                        temp_melee_weapon = MeleeWeapon.POWER_BLADE;
+                        counter = 0;
+                        break;
+                    default:
+                        temp_melee_weapon = MeleeWeapon.CHAIN_SWORD;
+                        break;
 
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
+            break;
         }
         added_spc_mrn.setMeleeWeapon(temp_melee_weapon);
 // ---------------------------------------------------------------------------------------------------------------------
@@ -179,32 +192,40 @@ public class UserInputHandler {
             counter++;
             System.out.println(counter + ". " + category.name());
         }
-        try {
-            counter = temp_scn.nextInt();
-            switch (counter) {
-                case 1:
-                    temp_category = AstartesCategory.AGGRESSOR;
-                    counter = 0;
-                    break;
-                case 2:
-                    temp_category = AstartesCategory.INCEPTOR;
-                    counter = 0;
-                    break;
-                case 3:
-                    temp_category = AstartesCategory.TACTICAL;
-                    counter = 0;
-                    break;
-                case 4:
-                    temp_category = AstartesCategory.TERMINATOR;
-                    counter = 0;
-                    break;
-                default:
-                    temp_category = AstartesCategory.AGGRESSOR;
-                    counter = 0;
-                    break;
+        while (true) {
+            try {
+                if (!temp_scn.hasNextInt()) {
+                    System.out.println("Введите число!");
+                    temp_scn.next();
+                    continue;
+                }
+                counter = temp_scn.nextInt();
+                switch (counter) {
+                    case 1:
+                        temp_category = AstartesCategory.AGGRESSOR;
+                        counter = 0;
+                        break;
+                    case 2:
+                        temp_category = AstartesCategory.INCEPTOR;
+                        counter = 0;
+                        break;
+                    case 3:
+                        temp_category = AstartesCategory.TACTICAL;
+                        counter = 0;
+                        break;
+                    case 4:
+                        temp_category = AstartesCategory.TERMINATOR;
+                        counter = 0;
+                        break;
+                    default:
+                        temp_category = AstartesCategory.AGGRESSOR;
+                        counter = 0;
+                        break;
 
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
+            break;
         }
         added_spc_mrn.setCategory(temp_category);
 // ---------------------------------------------------------------------------------------------------------------------
@@ -252,6 +273,59 @@ public class UserInputHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void executeSctiptCommand(String user_input) {
+        try {
+            Scanner temp_scn = new Scanner(new File(user_input));
+            while (temp_scn.hasNext()) {
+                int i = 0;
+                String temp = temp_scn.nextLine();
+                String[] temp_sec = temp.split("\\s");
+                switch (temp) {
+                    case "help":
+                        commandList();
+                        break;
+                    case "info":
+                        infoCommand();
+                        break;
+                    case "show":
+                        showCommand();
+                        break;
+                    case "add":
+                        if (temp_sec[temp_sec.length - 1].equals("add")) {
+                            System.out.println("Введите имя после команды!");
+                            break;
+                        }
+                        addCommand(temp_sec[temp_sec.length - 1]);
+                        break;
+                    case "remove_by_id":
+                        try {
+                            i = Integer.parseInt(temp_sec[temp_sec.length - 1]);
+                        } catch (Exception e) {
+                            System.out.println("Введите число!");
+                        }
+                        removeByIdCommand(i);
+                        break;
+                    case "clear":
+                        clearCommand();
+                        break;
+                    case "save":
+                        saveCommand();
+                        break;
+                    case "execute_script":
+                        executeSctiptCommand(temp_sec[temp_sec.length - 1]);
+                        break;
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println("Файл не найден!");
+        }
+    }
+
+    public void addIfMaxCommand(){
 
     }
 

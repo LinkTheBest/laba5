@@ -12,10 +12,12 @@ public class SpaceMarine implements Comparable {
     private Chapter chapter; //Поле может быть null
 
     public SpaceMarine() {
-        id = (int) Math.random() * 1000;
+        id = (int) Math.random() * 10000;
         creationDate = LocalDate.now();
 
     }
+
+    public int getId() { return id; }
 
     public String getName() {
         return name;

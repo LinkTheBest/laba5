@@ -17,7 +17,6 @@ public class UserDataGetter {
         System.out.println("Введите команды или введите 'help' для просмотра списка команд...");
         loop_one:
         while (true) {
-
             command_string = users_input.nextLine();
             users_input_in_words = command_string.split("\\s");
             temp_value = users_input_in_words[0];
@@ -51,6 +50,12 @@ public class UserDataGetter {
                     break;
                 case "save":
                     usr_input_hndlr.saveCommand();
+                    break;
+                case "execute_script":
+                    usr_input_hndlr.executeSctiptCommand(users_input_in_words[users_input_in_words.length - 1]);
+                    break;
+                case"exit":
+                    System.exit(0);
                     break;
             }
 //             System.out.println(command_string);
