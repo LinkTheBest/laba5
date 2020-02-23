@@ -57,6 +57,12 @@ public class UserDataGetter {
                 case"exit":
                     System.exit(0);
                     break;
+                case "add_if_max":
+                    usr_input_hndlr.addIfMaxCommand(users_input_in_words[users_input_in_words.length - 1]);
+                    break;
+                case "add_if_min":
+                    usr_input_hndlr.addIfMinCommand(users_input_in_words[users_input_in_words.length - 1]);
+                    break;
             }
 //             System.out.println(command_string);
         }

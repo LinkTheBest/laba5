@@ -317,6 +317,15 @@ public class UserInputHandler {
                     case "execute_script":
                         executeSctiptCommand(temp_sec[temp_sec.length - 1]);
                         break;
+                    case "exit":
+                        System.exit(0);
+                        break;
+                    case "add_if_max":
+                        addIfMaxCommand(temp_sec[temp_sec.length - 1]);
+                        break;
+                    case "add_if_min":
+                        addIfMinCommand(temp_sec[temp_sec.length - 1]);
+                        break;
                 }
 
             }
@@ -325,8 +334,18 @@ public class UserInputHandler {
         }
     }
 
-    public void addIfMaxCommand(){
+    public void addIfMaxCommand(String name) {
+        FindMaxElement find_max = new FindMaxElement();
+        addCommand(name);
+        List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
+        space_deque = find_max.makeDecision(temp_list);
+    }
 
+    public void addIfMinCommand(String name) {
+        FindMinElement find_min = new FindMinElement();
+        addCommand(name);
+        List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
+        space_deque = find_min.makeDecision(temp_list);
     }
 
 
