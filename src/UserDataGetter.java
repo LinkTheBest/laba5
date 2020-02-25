@@ -54,14 +54,29 @@ public class UserDataGetter {
                 case "execute_script":
                     usr_input_hndlr.executeSctiptCommand(users_input_in_words[users_input_in_words.length - 1]);
                     break;
-                case"exit":
+                case "exit":
                     System.exit(0);
                     break;
                 case "add_if_max":
+                    if (users_input_in_words[users_input_in_words.length - 1].equals("add_if_max")) {
+                        System.out.println("Введите имя после команды!");
+                        break;
+                    }
                     usr_input_hndlr.addIfMaxCommand(users_input_in_words[users_input_in_words.length - 1]);
                     break;
                 case "add_if_min":
+                    if (users_input_in_words[users_input_in_words.length - 1].equals("add_if_min")) {
+                        System.out.println("Введите имя после команды!");
+                        break;
+                    }
                     usr_input_hndlr.addIfMinCommand(users_input_in_words[users_input_in_words.length - 1]);
+                    break;
+                case "remove_lower":
+                    if (users_input_in_words[users_input_in_words.length - 1].equals("remove_lower")) {
+                        System.out.println("Введите имя после команды!");
+                        break;
+                    }
+                    usr_input_hndlr.removeLowerCommand(users_input_in_words[users_input_in_words.length - 1]);
                     break;
             }
 //             System.out.println(command_string);

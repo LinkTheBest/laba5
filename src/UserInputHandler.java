@@ -47,7 +47,6 @@ public class UserInputHandler {
 
     public void addCommand(String name) {
         List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
-        int attempt_counter = 3;
         int counter = 0;
         Scanner temp_scn = new Scanner(System.in);
         Coordinates temp_coords = new Coordinates();
@@ -250,7 +249,6 @@ public class UserInputHandler {
     public void saveCommand() {
         RandomFilePathCreator rnd_file_path_creator = new RandomFilePathCreator();
         JSONArray to_file_array = new JSONArray();
-
         for (SpaceMarine spc_mrn : space_deque) {
             JSONObject to_json_array_obj = new JSONObject();
             to_json_array_obj.put("name", spc_mrn.getName());
@@ -346,6 +344,22 @@ public class UserInputHandler {
         addCommand(name);
         List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
         space_deque = find_min.makeDecision(temp_list);
+    }
+
+    public void removeLowerCommand(String name) {
+        LowerRemover lower_remover = new LowerRemover();
+        addCommand(name);
+        List<SpaceMarine> temp_list = new ArrayList<>(space_deque);
+        space_deque = lower_remover.removeLowerElement(temp_list);
+
+    }
+
+    public void sumOfHealthCommand() {
+        int sum = 0;
+        for (SpaceMarine spc : space_deque) {
+            sum = +spc.getHealth();
+        }
+        System.out.println("Сумма полей health");
     }
 
 

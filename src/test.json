@@ -5,8 +5,8 @@
   "coordinate_y": 12.0,
   "health": 100.0,
   "category": "AGGRESSOR",
-  "weapon": " ",
-  "melee_weapon": " ",
+  "weapon": "COMBI_PLASMA_GUN",
+  "melee_weapon": "MANREAPER",
   "chapter": " "
 
 },
@@ -16,8 +16,8 @@
     "coordinate_y": 12.0,
     "health": 100.0,
     "category": "AGGRESSOR",
-    "weapon": " ",
-    "melee_weapon": " ",
+    "weapon": "COMBI_FLAMER",
+    "melee_weapon": "POWER_BLADE",
     "chapter": " "
   }
 ]
