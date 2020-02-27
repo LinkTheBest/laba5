@@ -7,8 +7,9 @@ import java.math.BigDecimal;
 import java.io.*;
 
 public class JsonDataHandler {
-    private String path_to_json_file = "/Users/nickyking/IdeaProjects/laba5/src/test.json";
-//    private String path_to_json_file = "C:\\Users\\Nikitka\\IdeaProjects\\laba5\\src\\test.json";
+    //    private String path_to_json_file = "/Users/nickyking/IdeaProjects/laba5/src/test.json";
+//  private String path_to_json_file = "C:\\Users\\Nikitka\\IdeaProjects\\laba5\\src\\test.json";
+    private String path_to_json_file = System.getenv("JSON");
     private JSONParser json_parser = new JSONParser();
 
     public Integer getJsonCollectionSize() {
@@ -34,8 +35,6 @@ public class JsonDataHandler {
             JSONArray json_array = (JSONArray) json_parser.parse(new FileReader(path_to_json_file));
             JSONObject json_data = (JSONObject) json_array.get(index);
             from_json_name = (String) json_data.get("name");
-//            System.out.println(from_json_name);
-
         } catch (IOException e) {
             System.err.println(e);
         } catch (ParseException pe) {
@@ -53,7 +52,6 @@ public class JsonDataHandler {
             JSONObject json_data = (JSONObject) json_array.get(index);
             json_x = (Double) json_data.get("coordinate_x");
             json_y = BigDecimal.valueOf((Double) json_data.get("coordinate_y")).floatValue();
-//            System.out.println(from_json_name);
         } catch (IOException e) {
             System.err.println(e);
         } catch (ParseException pe) {

@@ -12,9 +12,10 @@ public class SpaceMarine implements Comparable {
     private Chapter chapter; //Поле может быть null
 
     public SpaceMarine() {
-        id = (int) Math.random() * 10000;
+        double temp;
+        temp = Math.random() * 10000;
+        id = (int) temp;
         creationDate = LocalDate.now();
-
     }
 
     public int getId() { return id; }
@@ -79,13 +80,14 @@ public class SpaceMarine implements Comparable {
     @Override
     public int compareTo(Object o) {
         SpaceMarine temp_space_marine = (SpaceMarine) o;
-        if (this.id < temp_space_marine.id) {
+        if (this.health > temp_space_marine.health) {
             return -1;
-        } else if (this.id > temp_space_marine.id) {
+        } else if (this.health < temp_space_marine.health) {
             return 1;
         }
         return 0;
     }
+
 }
 
 

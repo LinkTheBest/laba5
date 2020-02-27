@@ -1,6 +1,5 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.io.*;
 import java.util.*;
 
@@ -96,12 +95,21 @@ public class UserInputHandler {
         }
 // ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите имя главы:");
-        try {
-            temp_chapter.setName(temp_scn.nextLine());
-        } catch (Exception e) {
-            System.out.println("Введите строку!");
+        while (true) {
+            try {
+                if (!temp_scn.hasNext()) {
+                    System.out.println("Введите имя!");
+                    temp_scn.next();
+                    continue;
+                }
+                temp_chapter.setName(temp_scn.next());
+            } catch (Exception e) {
+                System.out.println("Введите строку!");
+            }
+            break;
         }
         added_spc_mrn.setChapter(temp_chapter);
+
 // ---------------------------------------------------------------------------------------------------------------------
         System.out.println("Введите номер нужного вам названия 'Weapon':");
         for (Weapon weapon : Weapon.values()) {
@@ -251,15 +259,19 @@ public class UserInputHandler {
         JSONArray to_file_array = new JSONArray();
         for (SpaceMarine spc_mrn : space_deque) {
             JSONObject to_json_array_obj = new JSONObject();
-            to_json_array_obj.put("name", spc_mrn.getName());
-            to_json_array_obj.put("coordinate_x", spc_mrn.getCoordinates().getX());
-            to_json_array_obj.put("coordinate_y", spc_mrn.getCoordinates().getY());
-            to_json_array_obj.put("health", spc_mrn.getHealth());
-            to_json_array_obj.put("category", spc_mrn.getCategory().name());
-            to_json_array_obj.put("weapon", spc_mrn.getWeaponType().name());
-            to_json_array_obj.put("melee_weapon", spc_mrn.getMeleeWeapon().name());
-            to_json_array_obj.put("chapter", spc_mrn.getChapter().getName());
-            to_file_array.add(to_json_array_obj);
+            try {
+                to_json_array_obj.put("name", spc_mrn.getName());
+                to_json_array_obj.put("coordinate_x", spc_mrn.getCoordinates().getX());
+                to_json_array_obj.put("coordinate_y", spc_mrn.getCoordinates().getY());
+                to_json_array_obj.put("health", spc_mrn.getHealth());
+                to_json_array_obj.put("category", spc_mrn.getCategory().name());
+                to_json_array_obj.put("weapon", spc_mrn.getWeaponType().name());
+                to_json_array_obj.put("melee_weapon", spc_mrn.getMeleeWeapon().name());
+                to_json_array_obj.put("chapter", spc_mrn.getChapter().getName());
+                to_file_array.add(to_json_array_obj);
+            } catch (Exception e) {
+                System.out.println("Вы что-то делаете не так!");
+            }
         }
         try {
             BufferedOutputStream output_stream = new BufferedOutputStream(new FileOutputStream(rnd_file_path_creator.pathCreator()));
@@ -357,9 +369,26 @@ public class UserInputHandler {
     public void sumOfHealthCommand() {
         int sum = 0;
         for (SpaceMarine spc : space_deque) {
-            sum = +spc.getHealth();
+            sum = sum + spc.getHealth();
         }
-        System.out.println("Сумма полей health");
+        System.out.println("Сумма полей health:" + sum);
+    }
+
+    public void printDescendingCommand() {
+        List<SpaceMarine> temp = new ArrayList<>(space_deque);
+        Collections.sort(temp);
+        space_deque = new ArrayDeque<>(temp);
+        showCommand();
+    }
+
+    public void printFieldDescendingHealthCommmand() {
+        List<SpaceMarine> temp = new ArrayList<>(space_deque);
+        Collections.sort(temp);
+        space_deque = new ArrayDeque<>(temp);
+        for (SpaceMarine spc : space_deque) {
+            System.out.println(spc.getHealth());
+        }
+
     }
 
 

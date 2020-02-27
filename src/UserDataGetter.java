@@ -78,8 +78,16 @@ public class UserDataGetter {
                     }
                     usr_input_hndlr.removeLowerCommand(users_input_in_words[users_input_in_words.length - 1]);
                     break;
+                case "sum_of_health":
+                    usr_input_hndlr.sumOfHealthCommand();
+                    break;
+                case "print_descending":
+                    usr_input_hndlr.printDescendingCommand();
+                    break;
+                case "print_field_descending_health":
+                    usr_input_hndlr.printFieldDescendingHealthCommmand();
+                    break;
             }
-//             System.out.println(command_string);
         }
     }
 }
