@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.io.*;
 
 public class JsonDataHandler {
-    //    private String path_to_json_file = "/Users/nickyking/IdeaProjects/laba5/src/test.json";
+        private String path_to_json_file = "/Users/nickyking/IdeaProjects/laba5/src/test.json";
 //  private String path_to_json_file = "C:\\Users\\Nikitka\\IdeaProjects\\laba5\\src\\test.json";
-    private String path_to_json_file = System.getenv("JSON");
+   // private String path_to_json_file = System.getenv("JSON");
     private JSONParser json_parser = new JSONParser();
 
     public Integer getJsonCollectionSize() {
