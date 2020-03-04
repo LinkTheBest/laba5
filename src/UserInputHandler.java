@@ -5,9 +5,13 @@ import java.io.*;
 import java.util.*;
 
 public class UserInputHandler {
+    List<File> tempList;
     JsonDataHandler jsonDataHandler = new JsonDataHandler();
     Deque<SpaceMarine> spaceDeque;
     private int arraySize = 0;
+    {
+        tempList = new LinkedList<>();
+    }
 
     public UserInputHandler() {
         arraySize = jsonDataHandler.getJsonCollectionSize();
@@ -302,61 +306,86 @@ public class UserInputHandler {
     }
 
     public void executeSctiptCommand(String user_input) {
-        try {
-            Scanner tempScn = new Scanner(new File(user_input));
-            while (tempScn.hasNext()) {
-                int i = 0;
-                String temp = tempScn.nextLine();
-                String[] tempSec = temp.split("\\s");
-                switch (temp) {
-                    case "help":
-                        commandList();
-                        break;
-                    case "info":
-                        infoCommand();
-                        break;
-                    case "show":
-                        showCommand();
-                        break;
-                    case "add":
-                        if (tempSec[tempSec.length - 1].equals("add")) {
-                            System.out.println("Введите имя после команды!");
-                            break;
-                        }
-                        addCommand(tempSec[tempSec.length - 1]);
-                        break;
-                    case "remove_by_id":
-                        try {
-                            i = Integer.parseInt(tempSec[tempSec.length - 1]);
-                        } catch (Exception e) {
-                            System.out.println("Введите число!");
-                        }
-                        removeByIdCommand(i);
-                        break;
-                    case "clear":
-                        clearCommand();
-                        break;
-                    case "save":
-                        saveCommand();
-                        break;
-                    case "execute_script":
-                        executeSctiptCommand(tempSec[tempSec.length - 1]);
-                        break;
-                    case "exit":
-                        System.exit(0);
-                        break;
-                    case "add_if_max":
-                        addIfMaxCommand(tempSec[tempSec.length - 1]);
-                        break;
-                    case "add_if_min":
-                        addIfMinCommand(tempSec[tempSec.length - 1]);
-                        break;
+
+        File file = new File(user_input);
+        if (tempList.lastIndexOf(file) == -1) {
+            tempList.add(file);
+            try {
+                if (!file.exists() || !file.isFile()) {
+                    System.out.println(("Файл не существует."));
+                    return;
+                }
+                if (!file.canRead()) {
+                    System.out.println("Файл защищён от чтения!");
+                    return;
+                }
+                if (file.length() == 0) {
+                    System.out.println("Команды отсутствуют!");
+                    return;
                 }
 
+
+                Scanner tempScn = new Scanner(file);
+                while (tempScn.hasNext()) {
+                    try {
+                        int i = 0;
+                        String temp = tempScn.nextLine();
+                        String[] tempSec = temp.split("\\s");
+                        switch (temp) {
+                            case "help":
+                                commandList();
+                                break;
+                            case "info":
+                                infoCommand();
+                                break;
+                            case "show":
+                                showCommand();
+                                break;
+                            case "add":
+                                if (tempSec[tempSec.length - 1].equals("add")) {
+                                    System.out.println("Введите имя после команды!");
+                                    break;
+                                }
+                                addCommand(tempSec[tempSec.length - 1]);
+                                break;
+                            case "remove_by_id":
+                                try {
+                                    i = Integer.parseInt(tempSec[tempSec.length - 1]);
+                                } catch (Exception e) {
+                                    System.out.println("Введите число!");
+                                }
+                                removeByIdCommand(i);
+                                break;
+                            case "clear":
+                                clearCommand();
+                                break;
+                            case "save":
+                                saveCommand();
+                                break;
+                            case "execute_script":
+                                executeSctiptCommand(tempSec[tempSec.length - 1]);
+                                break;
+                            case "exit":
+                                System.exit(0);
+                                break;
+                            case "add_if_max":
+                                addIfMaxCommand(tempSec[tempSec.length - 1]);
+                                break;
+                            case "add_if_min":
+                                addIfMinCommand(tempSec[tempSec.length - 1]);
+                                break;
+                            default:
+                                System.out.println("Неизвестная команда");
+                        }
+                    }catch (Exception e){
+                        System.err.println(e);
+                    }
+                }
+                tempList.remove(0);
+            } catch (Exception e) {
+                System.out.println("Файл не найден!");
             }
-        } catch (Exception e) {
-            System.out.println("Файл не найден!");
-        }
+        } else System.out.println("Обнаружен цикл!");
     }
 
     public void addIfMaxCommand(String name) {
