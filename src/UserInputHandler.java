@@ -9,6 +9,7 @@ public class UserInputHandler {
     JsonDataHandler jsonDataHandler = new JsonDataHandler();
     Deque<SpaceMarine> spaceDeque;
     private int arraySize = 0;
+
     {
         tempList = new LinkedList<>();
     }
@@ -37,7 +38,7 @@ public class UserInputHandler {
         for (SpaceMarine s : spaceDeque) {
             System.out.println("-----------------");
             System.out.println("name: " + s.getName());
-            System.out.println("id:" + s.getId());
+            System.out.println("id: " + s.getId());
             System.out.println("Astartes Category: " + s.getCategory());
             System.out.print("Coordinate X: " + s.getCoordinates().getX() + " ");
             System.out.println("Coordinate Y: " + s.getCoordinates().getY());
@@ -46,221 +47,45 @@ public class UserInputHandler {
             System.out.println("MeleeWeapon Type: " + s.getMeleeWeapon());
             System.out.println("Chapter: " + s.getChapter().getName());
             System.out.println("-----------------");
-
         }
     }
 
     public void addCommand(String name) {
         List<SpaceMarine> tempList = new ArrayList<>(spaceDeque);
-        int counter = 0;
-        Scanner tempScn = new Scanner(System.in);
-        Coordinates tempCoords = new Coordinates();
-        Chapter tempChapter = new Chapter();
-        Weapon tempWeapon = null;
-        MeleeWeapon tempMeleeWeapon = null;
-        AstartesCategory tempCategory = null;
+        AddCommandMethods addCommandMethods = new AddCommandMethods();
         SpaceMarine addedSpcMrn = new SpaceMarine();
         addedSpcMrn.setName(name);
+        addedSpcMrn.setId(addCommandMethods.readId());
 // ---------------------------------------------------------------------------------------------------------------------
-        System.out.println("Введите координаты, сначала Х, затем Y: ");
-        while (true) {
-            try {
-                if (!tempScn.hasNextDouble()) {
-                    System.out.println("Введите два числа!");
-                    tempScn.next();
-                    continue;
-                }
-                tempCoords.setX(tempScn.nextDouble());
-                if (!tempScn.hasNextFloat()) {
-                    System.out.println("Введите число!");
-                    tempScn.next();
-                    continue;
-                }
-                tempCoords.setY(tempScn.nextFloat());
-            } catch (Exception e) {
-                System.out.println("Вызовите команду снова и введите координаты в заданном формате!");
-            }
-            break;
-        }
-        addedSpcMrn.setCoordinates(tempCoords);
+        addedSpcMrn.setCoordinates(addCommandMethods.readCoordinates());
 // ---------------------------------------------------------------------------------------------------------------------
-        System.out.println("Введите количество ХП: ");
-        while (true) {
-
-            try {
-                if (!tempScn.hasNextInt()) {
-                    System.out.println("Введите число!");
-                    tempScn.next();
-                    continue;
-                }
-                addedSpcMrn.setHealth(tempScn.nextInt());
-            } catch (Exception ex) {
-                System.out.println("Введите целочисленное значение!");
-            }
-            break;
-        }
+        addedSpcMrn.setHealth(addCommandMethods.readHealth());
 // ---------------------------------------------------------------------------------------------------------------------
-        System.out.println("Введите имя главы:");
-        while (true) {
-            try {
-                if (!tempScn.hasNext()) {
-                    System.out.println("Введите имя!");
-                    tempScn.next();
-                    continue;
-                }
-                tempChapter.setName(tempScn.next());
-            } catch (Exception e) {
-                System.out.println("Введите строку!");
-            }
-            break;
-        }
-        addedSpcMrn.setChapter(tempChapter);
-
+        addedSpcMrn.setChapter(addCommandMethods.readChapterName());
+// --------------------------------------------------------------------------------------------------------------------
+        addedSpcMrn.setWeaponType(addCommandMethods.readWeaponType());
 // ---------------------------------------------------------------------------------------------------------------------
-        System.out.println("Введите номер нужного вам названия 'Weapon':");
-        for (Weapon weapon : Weapon.values()) {
-            counter++;
-            System.out.println(counter + ". " + weapon.name());
-        }
-        while (true) {
-            try {
-                if (!tempScn.hasNextInt()) {
-                    System.out.println("Число слишком большое или же не соответсвует данному типу!");
-                    tempScn.next();
-                    continue;
-                }
-                counter = tempScn.nextInt();
-                switch (counter) {
-                    case 1:
-                        tempWeapon = Weapon.MELTAGUN;
-                        counter = 0;
-                        break;
-                    case 2:
-                        tempWeapon = Weapon.BOLT_PISTOL;
-                        counter = 0;
-                        break;
-                    case 3:
-                        tempWeapon = Weapon.COMBI_FLAMER;
-                        counter = 0;
-                        break;
-                    case 4:
-                        tempWeapon = Weapon.COMBI_PLASMA_GUN;
-                        counter = 0;
-                        break;
-                    case 5:
-                        tempWeapon = Weapon.MISSILE_LAUNCHER;
-                        counter = 0;
-                        break;
-                    default:
-                        if (counter >= 2147483647) {
-                            System.out.println("Выбрать все-таки стоит из списка)");
-                        }
-                        tempWeapon = Weapon.MELTAGUN;
-                        counter = 0;
-                        break;
-
-                }
-            } catch (Exception e) {
-            }
-            break;
-        }
-        addedSpcMrn.setWeaponType(tempWeapon);
+        addedSpcMrn.setMeleeWeapon(addCommandMethods.readMeleeWeaponCategory());
 // ---------------------------------------------------------------------------------------------------------------------
-        System.out.println("Введите номер нужного вам названия 'MeleeWeapon':");
-        for (MeleeWeapon melee_weapon : MeleeWeapon.values()) {
-            counter++;
-            System.out.println(counter + ". " + melee_weapon.name());
-        }
-        while (true) {
-            try {
-                if (!tempScn.hasNextInt()) {
-                    System.out.println("Число слишком большое или же не соответсвует данному типу!");
-                    tempScn.next();
-                    continue;
-                }
-                counter = tempScn.nextInt();
-                switch (counter) {
-                    case 1:
-                        tempMeleeWeapon = MeleeWeapon.CHAIN_SWORD;
-                        counter = 0;
-                        break;
-                    case 2:
-                        tempMeleeWeapon = MeleeWeapon.MANREAPER;
-                        counter = 0;
-                        break;
-                    case 3:
-                        tempMeleeWeapon = MeleeWeapon.POWER_BLADE;
-                        counter = 0;
-                        break;
-                    default:
-                        if (counter >= 2147483647) {
-                            System.out.println("Выбрать все-таки стоит из списка)");
-                        }
-                        tempMeleeWeapon = MeleeWeapon.CHAIN_SWORD;
-                        break;
-
-                }
-            } catch (Exception e) {
-            }
-            break;
-        }
-        addedSpcMrn.setMeleeWeapon(tempMeleeWeapon);
-// ---------------------------------------------------------------------------------------------------------------------
-        System.out.println("Введите номер нужного вам названия 'AstarsetsCategory':");
-        for (AstartesCategory category : AstartesCategory.values()) {
-            counter++;
-            System.out.println(counter + ". " + category.name());
-        }
-        while (true) {
-            try {
-                if (!tempScn.hasNextInt()) {
-                    System.out.println("Число слишком большое или же не соответсвует данному типу!");
-                    tempScn.next();
-                    continue;
-                }
-                counter = tempScn.nextInt();
-                switch (counter) {
-                    case 1:
-                        tempCategory = AstartesCategory.AGGRESSOR;
-                        counter = 0;
-                        break;
-                    case 2:
-                        tempCategory = AstartesCategory.INCEPTOR;
-                        counter = 0;
-                        break;
-                    case 3:
-                        tempCategory = AstartesCategory.TACTICAL;
-                        counter = 0;
-                        break;
-                    case 4:
-                        tempCategory = AstartesCategory.TERMINATOR;
-                        counter = 0;
-                        break;
-                    default:
-                        if (counter >= 2147483647) {
-                            System.out.println("Выбрать все-таки стоит из списка)");
-                        }
-                        tempCategory = AstartesCategory.AGGRESSOR;
-                        counter = 0;
-                        break;
-
-                }
-            } catch (Exception e) {
-            }
-            break;
-        }
-        addedSpcMrn.setCategory(tempCategory);
+        addedSpcMrn.setCategory(addCommandMethods.readAstartesCategory());
 // ---------------------------------------------------------------------------------------------------------------------
         tempList.add(addedSpcMrn);
         spaceDeque = new ArrayDeque<>(tempList);
+        System.out.println("Элемент успешно добавлен!");
     }
 
     public void removeByIdCommand(int index) {
         List<SpaceMarine> tempList = new ArrayList<>(spaceDeque);
+        Iterator<SpaceMarine> iterator = tempList.iterator();
         try {
-            tempList.remove(index);
+            while (iterator.hasNext()) {
+                SpaceMarine scp = iterator.next();
+                if (scp.getId() == index) {
+                    iterator.remove();
+                }
+            }
         } catch (Exception e) {
-            System.out.println("Такого элемента не существует!");
+            System.err.println(e);
         }
         spaceDeque = new ArrayDeque<>(tempList);
     }
@@ -270,20 +95,20 @@ public class UserInputHandler {
     }
 
     public void saveCommand() {
-        RandomFilePathCreator rnd_file_path_creator = new RandomFilePathCreator();
-        JSONArray to_file_array = new JSONArray();
-        for (SpaceMarine spc_mrn : spaceDeque) {
-            JSONObject to_json_array_obj = new JSONObject();
+        JSONArray toFileArray = new JSONArray();
+        for (SpaceMarine spcMrn : spaceDeque) {
+            JSONObject toJsonArrayObj = new JSONObject();
             try {
-                to_json_array_obj.put("name", spc_mrn.getName());
-                to_json_array_obj.put("coordinate_x", spc_mrn.getCoordinates().getX());
-                to_json_array_obj.put("coordinate_y", spc_mrn.getCoordinates().getY());
-                to_json_array_obj.put("health", spc_mrn.getHealth());
-                to_json_array_obj.put("category", spc_mrn.getCategory().name());
-                to_json_array_obj.put("weapon", spc_mrn.getWeaponType().name());
-                to_json_array_obj.put("melee_weapon", spc_mrn.getMeleeWeapon().name());
-                to_json_array_obj.put("chapter", spc_mrn.getChapter().getName());
-                to_file_array.add(to_json_array_obj);
+                toJsonArrayObj.put("name", spcMrn.getName());
+                toJsonArrayObj.put("id", spcMrn.getId());
+                toJsonArrayObj.put("coordinate_x", spcMrn.getCoordinates().getX());
+                toJsonArrayObj.put("coordinate_y", spcMrn.getCoordinates().getY());
+                toJsonArrayObj.put("health", spcMrn.getHealth());
+                toJsonArrayObj.put("category", spcMrn.getCategory().name());
+                toJsonArrayObj.put("weapon", spcMrn.getWeaponType().name());
+                toJsonArrayObj.put("melee_weapon", spcMrn.getMeleeWeapon().name());
+                toJsonArrayObj.put("chapter", spcMrn.getChapter().getName());
+                toFileArray.add(toJsonArrayObj);
             } catch (Exception e) {
                 System.out.println("Какое-то из полей не заполнено!");
             }
@@ -291,10 +116,10 @@ public class UserInputHandler {
         try {
             File finalFile = new File(System.getenv("JSON"));
             PrintWriter writer = new PrintWriter(finalFile);
-            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(finalFile));
             writer.print("");
             writer.close();
-            outputStream.write(to_file_array.toJSONString().getBytes());
+            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(finalFile));
+            outputStream.write(toFileArray.toJSONString().getBytes());
             outputStream.flush();
             outputStream.close();
         } catch (java.io.FileNotFoundException err) {
@@ -306,7 +131,6 @@ public class UserInputHandler {
     }
 
     public void executeSctiptCommand(String user_input) {
-
         File file = new File(user_input);
         if (tempList.lastIndexOf(file) == -1) {
             tempList.add(file);
@@ -323,15 +147,14 @@ public class UserInputHandler {
                     System.out.println("Команды отсутствуют!");
                     return;
                 }
-
-
                 Scanner tempScn = new Scanner(file);
                 while (tempScn.hasNext()) {
                     try {
                         int i = 0;
                         String temp = tempScn.nextLine();
                         String[] tempSec = temp.split("\\s");
-                        switch (temp) {
+                        String command = tempSec[0];
+                        switch (command) {
                             case "help":
                                 commandList();
                                 break;
@@ -377,7 +200,7 @@ public class UserInputHandler {
                             default:
                                 System.out.println("Неизвестная команда");
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         System.err.println(e);
                     }
                 }

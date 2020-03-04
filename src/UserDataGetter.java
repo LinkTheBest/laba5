@@ -90,6 +90,9 @@ public class UserDataGetter {
                 case "print_field_descending_health":
                     usrInputHndlr.printFieldDescendingHealthCommmand();
                     break;
+                default:
+                    System.out.println("Гляньте список команд!)))))");
+                    break;
             }
         }
     }

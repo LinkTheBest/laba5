@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.io.*;
 
 public class JsonDataHandler {
-    private String pathToJsonFile = "/Users/nickyking/IdeaProjects/laba6/src/test.json";
+    //private String pathToJsonFile = "/Users/nickyking/IdeaProjects/laba6/src/test.json";
     //private String pathToJsonFile = "C:\\Users\\Nikitka\\IdeaProjects\\laba5\\src\\test.json";
-    //private String pathToJsonFile = System.getenv("JSON");
+    private String pathToJsonFile = System.getenv("JSON");
     private JSONParser jsonParser = new JSONParser();
 
     public Integer getJsonCollectionSize() {
@@ -84,7 +84,7 @@ public class JsonDataHandler {
         try {
             JSONArray json_array = (JSONArray) jsonParser.parse(new FileReader(pathToJsonFile));
             JSONObject json_data = (JSONObject) json_array.get(index);
-            jsonHealth = BigDecimal.valueOf((Double) json_data.get("health")).intValue();
+            jsonHealth = BigDecimal.valueOf((Long) json_data.get("health")).intValue();
         } catch (IOException e) {
             System.err.println(e);
         } catch (ParseException pe) {

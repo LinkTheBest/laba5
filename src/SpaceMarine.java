@@ -13,7 +13,7 @@ public class SpaceMarine implements Comparable {
 
     public SpaceMarine() {
         double temp;
-        temp = Math.random() * 10000;
+        temp = Math.random() * 100000;
         id = (int) temp;
         creationDate = LocalDate.now();
     }
