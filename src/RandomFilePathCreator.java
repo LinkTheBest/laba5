@@ -3,7 +3,7 @@ import java.util.Random;
 public class RandomFilePathCreator {
     private final String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final int MAX_LENGHT = 9;
-    String final_path = "";
+    String finalPath = "";
 
     public String pathCreator() {
         Random random = new Random();
@@ -11,7 +11,7 @@ public class RandomFilePathCreator {
         for (int i = 0; i < MAX_LENGHT; i++) {
             sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
         }
-        final_path = "src/" + sb.toString() + ".json";
-        return final_path;
+        finalPath = "src/" + sb.toString() + ".json";
+        return finalPath;
     }
 }

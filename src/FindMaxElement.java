@@ -5,28 +5,28 @@ import java.util.List;
 public class FindMaxElement {
 
     public Deque<SpaceMarine> makeDecision(List<SpaceMarine> input_deque) {
-        List<SpaceMarine> temp_list = input_deque;
-        SpaceMarine new_object = temp_list.get(input_deque.size() - 1);
+        List<SpaceMarine> tempList = input_deque;
+        SpaceMarine newObject = tempList.get(input_deque.size() - 1);
 
-        SpaceMarine temp_object = null;
-        temp_list.remove(input_deque.size() - 1);
-        int max_id = 0;
-        for (SpaceMarine spc : temp_list) {
-            if (spc.getId() > max_id) {
-                max_id = spc.getId();
-                temp_object = spc;
+        SpaceMarine tempObject = null;
+        tempList.remove(input_deque.size() - 1);
+        int maxId = 0;
+        for (SpaceMarine spc : tempList) {
+            if (spc.getId() > maxId) {
+                maxId = spc.getId();
+                tempObject = spc;
             }
         }
         try {
-            if (temp_object.getId() < new_object.getId()) {
-                input_deque.add(new_object);
+            if (tempObject.getId() < newObject.getId()) {
+                input_deque.add(newObject);
                 System.out.println("Объект был добавлен");
             } else {
                 System.out.println("Объект не был добавлен");
             }
         } catch (Exception e) {
         }
-        Deque<SpaceMarine> temp_deque = new ArrayDeque<>(temp_list);
-        return temp_deque;
+        Deque<SpaceMarine> tempDeque = new ArrayDeque<>(tempList);
+        return tempDeque;
     }
 }

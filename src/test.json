@@ -1,6 +1,7 @@
 [{
 
   "name": "ОВОЩ",
+  "id" : 0,
   "coordinate_x": 12.0,
   "coordinate_y": 12.0,
   "health": 100.0,
@@ -12,6 +13,7 @@
 },
   {
     "name": "ФРУКТ",
+    "id" : 9999,
     "coordinate_x": 12.0,
     "coordinate_y": 12.0,
     "health": 100.0,
