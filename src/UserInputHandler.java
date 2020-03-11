@@ -54,8 +54,11 @@ public class UserInputHandler {
         List<SpaceMarine> tempList = new ArrayList<>(spaceDeque);
         AddCommandMethods addCommandMethods = new AddCommandMethods();
         SpaceMarine addedSpcMrn = new SpaceMarine();
+        int tempId;
         addedSpcMrn.setName(name);
-        addedSpcMrn.setId(addCommandMethods.readId());
+        tempId = addCommandMethods.readId();
+        if(tempId == 0){
+        } else addedSpcMrn.setId(tempId);
 // ---------------------------------------------------------------------------------------------------------------------
         addedSpcMrn.setCoordinates(addCommandMethods.readCoordinates());
 // ---------------------------------------------------------------------------------------------------------------------
