@@ -214,8 +214,8 @@ public class UserInputHandler {
     public void addIfMaxCommand(String name) {
         FindMaxElement findMax = new FindMaxElement();
         addCommand(name);
-        List<SpaceMarine> temp_list = new ArrayList<>(spaceDeque);
-        spaceDeque = findMax.makeDecision(temp_list);
+        List<SpaceMarine> tempList = new ArrayList<>(spaceDeque);
+        spaceDeque = findMax.makeDecision(tempList);
     }
 
     public void addIfMinCommand(String name) {

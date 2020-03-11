@@ -12,17 +12,16 @@ public class AddCommandMethods {
     private AstartesCategory tempCategory = null;
 
     public int readId() {
-        System.out.println("Чтобы задать ID автоматически введите 0");
         System.out.println("Введите положительное ID до 99999:");
         while (true) {
             try {
                 if (!tempScn.hasNextInt()) {
-                    System.out.println("Введите число!");
+                    System.out.println("Число неверное или слишком большое!");
                     tempScn.next();
                     continue;
                 }
                 id = tempScn.nextInt();
-                if (id < 0) {
+                if (id < 0 || id > 99999) {
                     id = 0;
                 }
             } catch (Exception ex) {
@@ -44,7 +43,7 @@ public class AddCommandMethods {
                 }
                 tempCoords.setX(tempScn.nextDouble());
                 if (!tempScn.hasNextFloat()) {
-                    System.out.println("Введите число!");
+                    System.out.println("Число неверное или слишком большое!");
                     tempScn.next();
                     continue;
                 }
@@ -63,7 +62,7 @@ public class AddCommandMethods {
 
             try {
                 if (!tempScn.hasNextInt()) {
-                    System.out.println("Введите число!");
+                    System.out.println("Число неверное или слишком большое!");
                     tempScn.next();
                     continue;
                 }
@@ -100,8 +99,8 @@ public class AddCommandMethods {
             counter++;
             if (counter == 1) {
                 System.out.println("[" + counter + "]" + ". " + weapon.name());
-            }else
-            System.out.println(counter + ". " + weapon.name());
+            } else
+                System.out.println(counter + ". " + weapon.name());
         }
         while (true) {
             try {
@@ -133,9 +132,7 @@ public class AddCommandMethods {
                         counter = 0;
                         break;
                     default:
-                        if (counter >= 2147483647) {
-                            System.out.println("Выбрать все-таки стоит из списка)");
-                        }
+                        System.out.println("Выбрать все-таки стоит из списка)");
                         tempWeapon = Weapon.MELTAGUN;
                         counter = 0;
                         break;
@@ -154,8 +151,8 @@ public class AddCommandMethods {
             counter++;
             if (counter == 1) {
                 System.out.println("[" + counter + "]" + ". " + meleeWeapon.name());
-            }else
-            System.out.println(counter + ". " + meleeWeapon.name());
+            } else
+                System.out.println(counter + ". " + meleeWeapon.name());
         }
         while (true) {
             try {
@@ -179,9 +176,7 @@ public class AddCommandMethods {
                         counter = 0;
                         break;
                     default:
-                        if (counter >= 2147483647) {
-                            System.out.println("Выбрать все-таки стоит из списка)");
-                        }
+                        System.out.println("Выбрать все-таки стоит из списка)");
                         tempMeleeWeapon = MeleeWeapon.CHAIN_SWORD;
                         break;
 
@@ -199,8 +194,8 @@ public class AddCommandMethods {
             counter++;
             if (counter == 1) {
                 System.out.println("[" + counter + "]" + ". " + category.name());
-            }else
-            System.out.println(counter + ". " + category.name());
+            } else
+                System.out.println(counter + ". " + category.name());
         }
         while (true) {
             try {
@@ -228,9 +223,7 @@ public class AddCommandMethods {
                         counter = 0;
                         break;
                     default:
-                        if (counter >= 2147483647) {
-                            System.out.println("Выбрать все-таки стоит из списка)");
-                        }
+                        System.out.println("Выбрать все-таки стоит из списка)");
                         tempCategory = AstartesCategory.AGGRESSOR;
                         counter = 0;
                         break;
